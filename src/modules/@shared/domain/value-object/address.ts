@@ -1,21 +1,51 @@
-import ValueObject from "../../../@shared/domain/value-object/value-object.interface"
+import ValueObject from '../../../@shared/domain/value-object/value-object.interface'
 
-export default class Address implements ValueObject {
-  _street: string = ""
-  _number: string = ""
-  _complement: string = ""
-  _city: string = ""
-  _state: string = ""
-  _zipCode: string = ""
+type Props = {
+  street: string
+  number: string
+  complement: string
+  city: string
+  state: string
+  zipCode: string
+}
 
-  constructor(street: string, number: string, complement: string, city: string, state: string, zipCode: string) {
+export default class Address
+  implements ValueObject
+{
+  _street: string = ''
+  _number: string = ''
+  _complement: string = ''
+  _city: string = ''
+  _state: string = ''
+  _zipCode: string = ''
+
+  constructor(
+    street: string,
+    number: string,
+    complement: string,
+    city: string,
+    state: string,
+    zipCode: string
+  ) {
     this._street = street
     this._number = number
     this._complement = complement
     this._city = city
     this._state = state
     this._zipCode = zipCode
+  }
 
+  static newInstance(props: Props) {
+    const address = new Address(
+      props.street,
+      props.number,
+      props.complement,
+      props.city,
+      props.state,
+      props.zipCode
+    )
+    address.validate()
+    return address
   }
 
   get street(): string {
@@ -44,22 +74,22 @@ export default class Address implements ValueObject {
 
   validate() {
     if (this._street.length === 0) {
-      throw new Error("Street is required")
+      throw new Error('Street is required')
     }
     if (this._number.length === 0) {
-      throw new Error("Number is required")
+      throw new Error('Number is required')
     }
     if (this._complement.length === 0) {
-      throw new Error("Complement is required")
+      throw new Error('Complement is required')
     }
     if (this._city.length === 0) {
-      throw new Error("City is required")
+      throw new Error('City is required')
     }
     if (this._state.length === 0) {
-      throw new Error("State is required")
+      throw new Error('State is required')
     }
     if (this._zipCode.length === 0) {
-      throw new Error("Zip code is required")
+      throw new Error('Zip code is required')
     }
   }
 }
