@@ -4,10 +4,7 @@ import GenerateInvoiceUseCase from './generate-invoice.usecase'
 describe('Generate invoice usecase unit test', () => {
   it('should generate a invoice', async () => {
     const usecase = new GenerateInvoiceUseCase({
-      async find() {
-        throw new Error('Method not implemented.')
-      },
-      async generate(invoice) {
+      async add(invoice) {
         expect(invoice.name).toBe('Invoice name')
         expect(invoice.document).toBe(
           'Invoice document'
@@ -42,6 +39,9 @@ describe('Generate invoice usecase unit test', () => {
         )
         expect(invoice.items[1].price).toBe(200)
         expect(invoice.total).toBe(300)
+      },
+      find() {
+        throw new Error('Method not implemented.')
       }
     })
 

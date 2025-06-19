@@ -12,6 +12,9 @@ describe('Find invoice usecase unit test', () => {
   it('should find a invoice', async () => {
     const date = new Date()
     const usecase = new FindInvoiceUseCase({
+      add() {
+        throw new Error('Method not implemented.')
+      },
       async find(id) {
         expect(id).toBe('Invoice id')
 
@@ -42,9 +45,6 @@ describe('Find invoice usecase unit test', () => {
           createdAt: date,
           updatedAt: date
         })
-      },
-      generate() {
-        throw new Error('Method not implemented.')
       }
     })
     const input: FindInvoiceUseCaseInputDto = {

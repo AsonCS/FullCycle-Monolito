@@ -1,5 +1,4 @@
 import Address from '../../../@shared/domain/value-object/address'
-import Id from '../../../@shared/domain/value-object/id.value-object'
 import UseCaseInterface from '../../../@shared/usecase/use-case.interface'
 import Invoice from '../../domain/invoice'
 import InvoiceItem from '../../domain/invoice-item'
@@ -42,9 +41,7 @@ export default class GenerateInvoiceUseCase
       createdAt: new Date(),
       updatedAt: new Date()
     })
-    await this._invoiceRepository.generate(
-      invoice
-    )
+    await this._invoiceRepository.add(invoice)
 
     return {
       id: invoice.id.id,
