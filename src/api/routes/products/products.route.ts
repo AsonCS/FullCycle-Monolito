@@ -23,6 +23,7 @@ productsRoute.get(
 productsRoute.post(
   '/',
   handler(async (req, res) => {
-    productAdm.addProduct(req.body)
+    await productAdm.addProduct(req.body)
+    res.sendStatus(204)
   })
 )
