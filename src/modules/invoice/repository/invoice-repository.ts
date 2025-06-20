@@ -4,7 +4,7 @@ import Invoice from '../domain/invoice'
 import InvoiceItem from '../domain/invoice-item'
 import InvoiceGateway from '../gateway/invoice-gateway'
 import InvoiceItemModel from './invoice-item.model'
-import { InvoiceModel } from './invoice.model'
+import InvoiceModel from './invoice.model'
 
 export default class InvoiceRepository
   implements InvoiceGateway

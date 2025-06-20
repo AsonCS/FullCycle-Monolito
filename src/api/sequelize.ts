@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize-typescript'
 
-import { ClientModel } from '../modules/client-adm/repository/client.model'
-import { InvoiceModel } from '../modules/invoice/repository/invoice.model'
+import ClientModel from '../modules/@shared/repository/client.model'
+import InvoiceModel from '../modules/invoice/repository/invoice.model'
 import InvoiceItemModel from '../modules/invoice/repository/invoice-item.model'
 import TransactionModel from '../modules/payment/repository/transaction.model'
 import ProductModel from '../modules/@shared/repository/product.model'
