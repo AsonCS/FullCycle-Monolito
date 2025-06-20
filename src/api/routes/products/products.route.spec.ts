@@ -5,7 +5,10 @@ import {
   AdmProductFields,
   AdmProductModel
 } from '../../../modules/product-adm/repository/product.model'
-import { FindAllFacadeOutputDto } from '../../../modules/product-adm/facade/product-adm.facade.interface'
+import {
+  AddProductFacadeInputDto,
+  FindAllFacadeOutputDto
+} from '../../../modules/product-adm/facade/product-adm.facade.interface'
 
 describe('E2E test for product', () => {
   ;(() => {
@@ -83,14 +86,15 @@ describe('E2E test for product', () => {
   })
 
   it('should create a product', async () => {
+    const input: AddProductFacadeInputDto = {
+      name: 'Chair',
+      description: 'Description',
+      purchasePrice: 100,
+      stock: 10
+    }
     const response = await request(app)
       .post('/products')
-      .send({
-        name: 'Chair',
-        description: 'Description',
-        purchasePrice: 100,
-        stock: 10
-      })
+      .send(input)
 
     expect(response.status).toBe(204)
     expect(response.body).toEqual({})

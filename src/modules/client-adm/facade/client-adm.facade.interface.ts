@@ -1,11 +1,16 @@
-import Address from "../../@shared/domain/value-object/address"
-
 export interface AddClientFacadeInputDto {
   id?: string
   name: string
   email: string
   document: string
-  address: Address
+  address: {
+    street: string
+    number: string
+    complement: string
+    city: string
+    state: string
+    zipCode: string
+  }
 }
 
 export interface FindClientFacadeInputDto {
@@ -17,12 +22,45 @@ export interface FindClientFacadeOutputDto {
   name: string
   email: string
   document: string
-  address: Address
+  address: {
+    street: string
+    number: string
+    complement: string
+    city: string
+    state: string
+    zipCode: string
+  }
   createdAt: Date
   updatedAt: Date
 }
 
+export interface FindAllClientFacadeOutputDto {
+  clients: {
+    id: string
+    name: string
+    email: string
+    document: string
+    address: {
+      street: string
+      number: string
+      complement: string
+      city: string
+      state: string
+      zipCode: string
+    }
+    createdAt: Date
+    updatedAt: Date
+  }[]
+}
+
 export default interface ClientAdmFacadeInterface {
-  add(input: AddClientFacadeInputDto): Promise<void>;
-  find(input: FindClientFacadeInputDto): Promise<FindClientFacadeOutputDto>;
+  add(
+    input: AddClientFacadeInputDto
+  ): Promise<void>
+
+  find(
+    input: FindClientFacadeInputDto
+  ): Promise<FindClientFacadeOutputDto>
+
+  findAll(): Promise<FindAllClientFacadeOutputDto>
 }

@@ -8,8 +8,8 @@ POST {{baseUrl}}/products
 Content-Type: application/json
 
 {
-    "name": "Chair 3",
-    "description": "Description 3",
-    "purchasePrice": 300,
-    "stock": 30
+    "name": "Chair",
+    "description": "Description",
+    "purchasePrice": 100,
+    "stock": 10
 }

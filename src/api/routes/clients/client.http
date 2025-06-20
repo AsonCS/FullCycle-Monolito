@@ -1,0 +1,26 @@
+@baseUrl = http://localhost:3000
+
+###
+GET {{baseUrl}}/clients
+
+###
+GET {{baseUrl}}/clients/1
+
+###
+POST {{baseUrl}}/clients
+Content-Type: application/json
+
+{
+"id": "1",
+"name": "Lucian",
+"email": "lucian@xpto.com",
+"document": "1234-5678",
+"address": {
+    "street": "Rua 123",
+    "number": "99",
+    "complement": "Casa Verde",
+    "city": "Criciúma",
+    "state": "SC",
+    "zipCode": "88888-888"
+}
+}

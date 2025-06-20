@@ -9,8 +9,7 @@ export const productsRoute = Router()
 productsRoute.get(
   '/',
   handler(async (_, res) => {
-    const products = await productAdm.findAll()
-    res.send(products)
+    res.send(await productAdm.findAll())
   })
 )
 
