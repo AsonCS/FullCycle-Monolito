@@ -9,7 +9,7 @@ import {
 import {
   CheckoutProductFields,
   CheckoutProductModel
-} from '../../invoice/repository/product.model'
+} from './product.model'
 import {
   CheckoutClientFields,
   CheckoutClientModel
@@ -31,7 +31,7 @@ export default class OrderModel extends Model {
   @Column({ allowNull: false })
   id: string
 
-  @HasOne(() => CheckoutClientModel)
+  @HasOne(() => CheckoutClientModel, 'orderId')
   client: CheckoutClientModel
 
   @HasMany(() => CheckoutProductModel, 'orderId')

@@ -4,7 +4,7 @@ import {
   sequelize,
   setupDb
 } from '../../sequelize'
-import { InvoiceModel } from '../../../modules/invoice/repository/invoice.model'
+import InvoiceModel from '../../../modules/invoice/repository/invoice.model'
 import InvoiceItemModel from '../../../modules/invoice/repository/invoice-item.model'
 import {
   FindAllInvoiceFacadeOutputDto,

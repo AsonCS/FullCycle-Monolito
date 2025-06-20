@@ -14,13 +14,16 @@ export default class ClientModel extends Model {
   @Column({ allowNull: false })
   id: string
 
+  @Column
+  orderId: string
+
   @Column({ allowNull: false })
   name: string
 
   @Column({ allowNull: false })
   email: string
 
-  @Column({ allowNull: false })
+  @Column
   document: string
 
   @Column({ allowNull: false })
@@ -41,9 +44,9 @@ export default class ClientModel extends Model {
   @Column({ allowNull: false })
   zipcode: string
 
-  @Column({ allowNull: false })
+  @Column
   createdAt: Date
 
-  @Column({ allowNull: false })
+  @Column
   updatedAt: Date
 }

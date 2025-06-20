@@ -14,7 +14,6 @@ export default class ProductModel extends Model {
   @Column({ allowNull: false })
   id: string
 
-  //@ForeignKey(() => InvoiceModel)
   @Column
   orderId: string
 

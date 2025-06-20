@@ -5,7 +5,7 @@ import {
   PrimaryKey,
   Table
 } from 'sequelize-typescript'
-import { InvoiceModel } from './invoice.model'
+import InvoiceModel from './invoice.model'
 
 @Table({
   tableName: 'invoice_items',

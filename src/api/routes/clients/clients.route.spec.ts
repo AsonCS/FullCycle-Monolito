@@ -4,7 +4,7 @@ import {
   sequelize,
   setupDb
 } from '../../sequelize'
-import { ClientModel } from '../../../modules/client-adm/repository/client.model'
+import { AdmClientModel } from '../../../modules/client-adm/repository/client.model'
 import {
   AddClientFacadeInputDto,
   FindAllClientFacadeOutputDto,
@@ -24,7 +24,7 @@ describe('E2E test for client', () => {
   it('should find a client', async () => {
     const createdAt = new Date()
     const updatedAt = new Date()
-    ClientModel.create({
+    AdmClientModel.create({
       id: '1',
       name: 'Lucian',
       email: 'lucian@123.com',
@@ -73,7 +73,7 @@ describe('E2E test for client', () => {
   it('should find all clients', async () => {
     const createdAt = new Date()
     const updatedAt = new Date()
-    ClientModel.create({
+    AdmClientModel.create({
       id: '1',
       name: 'Lucian',
       email: 'lucian@123.com',

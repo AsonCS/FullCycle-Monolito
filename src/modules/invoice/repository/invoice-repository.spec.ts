@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript'
-import { InvoiceModel } from './invoice.model'
+import InvoiceModel from './invoice.model'
 import InvoiceItemModel from './invoice-item.model'
 import Invoice from '../domain/invoice'
 import Id from '../../@shared/domain/value-object/id.value-object'

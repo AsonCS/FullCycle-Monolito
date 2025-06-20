@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript'
-import { ClientModel } from '../repository/client.model'
+import { AdmClientModel } from '../repository/client.model'
 import ClientAdmFacadeFactory from '../factory/client-adm.facade.factory'
 import Address from '../../@shared/domain/value-object/address'
 import { FindAllClientFacadeOutputDto } from './client-adm.facade.interface'
@@ -15,7 +15,7 @@ describe('Client Adm Facade test', () => {
       sync: { force: true }
     })
 
-    sequelize.addModels([ClientModel])
+    sequelize.addModels([AdmClientModel])
     await sequelize.sync()
   })
 
@@ -52,7 +52,7 @@ describe('Client Adm Facade test', () => {
 
     await facade.add(input)
 
-    const client = await ClientModel.findOne({
+    const client = await AdmClientModel.findOne({
       where: { id: '1' }
     })
 
