@@ -1,15 +1,21 @@
-import express, {
-  Request,
-  Response
-} from 'express'
+import { Router } from 'express'
+import { handler } from '..'
+import CheckoutFacadeFactory from '../../../modules/checkout/factory/facade.factory'
 
-export const checkoutRoute = express.Router()
+const checkout = CheckoutFacadeFactory.create()
+export const checkoutRoute = Router()
+
+checkoutRoute.get(
+  '/',
+  handler(async (_, res) => {
+    res.send(await checkout.findAll())
+  })
+)
 
 checkoutRoute.post(
   '/',
-  (req: Request, res: Response) => {
-    res.status(500).send({
-      error: 'Not implemented'
-    })
-  }
+  handler(async (req, res) => {
+    await checkout.placeOrder(req.body)
+    res.sendStatus(204)
+  })
 )
