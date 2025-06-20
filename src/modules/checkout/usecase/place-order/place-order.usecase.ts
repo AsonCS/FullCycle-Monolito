@@ -71,10 +71,15 @@ export default class PlaceOrderUseCase
       client: myClient,
       products: products
     })
-    await this._repository.add(order)
+    try {
+      await this._repository.add(order)
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
 
     return {
-      id: order.id.id,
+      orderId: order.id.id,
       total: order.total,
       products: order.products.map((p) => {
         return {

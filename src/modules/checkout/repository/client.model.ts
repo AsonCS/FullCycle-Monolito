@@ -1,5 +1,3 @@
-import ClientModel from '../../@shared/repository/client.model'
-
 export interface CheckoutClientFields {
   id: string
   name: string
@@ -11,7 +9,3 @@ export interface CheckoutClientFields {
   state: string
   zipcode: string
 }
-
-export class CheckoutClientModel
-  extends ClientModel
-  implements CheckoutClientFields {}

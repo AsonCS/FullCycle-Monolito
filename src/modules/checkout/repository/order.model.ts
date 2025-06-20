@@ -1,4 +1,5 @@
 import {
+  BelongsTo,
   Column,
   HasMany,
   HasOne,
@@ -6,19 +7,15 @@ import {
   PrimaryKey,
   Table
 } from 'sequelize-typescript'
-import {
-  CheckoutProductFields,
-  CheckoutProductModel
-} from './product.model'
-import {
-  CheckoutClientFields,
-  CheckoutClientModel
-} from './client.model'
+import { CheckoutProductFields } from './product.model'
+import { CheckoutClientFields } from './client.model'
+import ClientModel from '../../@shared/repository/client.model'
+import ProductModel from '../../@shared/repository/product.model'
 
 export interface OrderFields {
   id: string
-  client: CheckoutClientFields
-  products: CheckoutProductFields[]
+  client?: CheckoutClientFields
+  products?: CheckoutProductFields[]
   status: string
 }
 
@@ -31,12 +28,20 @@ export default class OrderModel extends Model {
   @Column({ allowNull: false })
   id: string
 
-  @HasOne(() => CheckoutClientModel, 'orderId')
-  client: CheckoutClientModel
+  @BelongsTo(() => ClientModel, 'clientId')
+  client: ClientModel
 
-  @HasMany(() => CheckoutProductModel, 'orderId')
-  products: CheckoutProductModel[]
+  @HasMany(() => ProductModel, 'orderId')
+  products: ProductModel[]
 
   @Column({ allowNull: false })
   status: string
+
+  get clientFields(): CheckoutClientFields {
+    return this.client
+  }
+
+  get productsFields(): CheckoutProductFields[] {
+    return this.products
+  }
 }

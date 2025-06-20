@@ -1,9 +1,17 @@
 export interface FindAllCheckoutFacadeOutputDto {
+  id: string
   client: {
     id: string
     name: string
     email: string
-    address: string
+    address: {
+      street: string
+      number: string
+      complement: string
+      city: string
+      state: string
+      zipCode: string
+    }
   }
   products: {
     id: string
@@ -22,7 +30,7 @@ export interface PlaceOrderCheckoutFacadeInputDto {
 }
 
 export interface PlaceOrderCheckoutFacadeOutputDto {
-  invoiceId: string
+  orderId: string
   total: number
   products: {
     productId: string

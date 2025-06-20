@@ -5,6 +5,7 @@ import InvoiceModel from '../modules/invoice/repository/invoice.model'
 import InvoiceItemModel from '../modules/invoice/repository/invoice-item.model'
 import TransactionModel from '../modules/payment/repository/transaction.model'
 import ProductModel from '../modules/@shared/repository/product.model'
+import OrderModel from '../modules/checkout/repository/order.model'
 
 export let sequelize: Sequelize
 
@@ -20,6 +21,7 @@ export async function setupDb(
     ClientModel,
     InvoiceModel,
     InvoiceItemModel,
+    OrderModel,
     TransactionModel,
     ProductModel
   ])

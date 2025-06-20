@@ -5,7 +5,7 @@ import InvoiceItem from '../../domain/invoice-item'
 import { FindAllInvoiceUseCaseOutputDto } from './find-all-invoice.dto'
 import FindAllInvoiceUseCase from './find-all-invoice.usecase'
 
-describe('Find invoice usecase unit test', () => {
+describe('FindAll invoice usecase unit test', () => {
   it('should find all invoices', async () => {
     const date = new Date()
     const usecase = new FindAllInvoiceUseCase({

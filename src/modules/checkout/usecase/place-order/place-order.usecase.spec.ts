@@ -160,7 +160,7 @@ describe('Place order usecase unit test', () => {
     })
 
     expect(result).toBeDefined()
-    expect(result.id).toBeDefined()
+    expect(result.orderId).toBeDefined()
     expect(result.products).toBeDefined()
     expect(result.products.length).toBe(1)
     expect(result.products[0].productId).toBe(

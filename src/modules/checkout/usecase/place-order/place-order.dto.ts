@@ -1,14 +1,14 @@
 export interface PlaceOrderInputDto {
-  clientId: string;
+  clientId: string
   products: {
-    productId: string;
-  }[];
+    productId: string
+  }[]
 }
 
 export interface PlaceOrderOutputDto {
-  id: string;
-  total: number;
+  orderId: string
+  total: number
   products: {
-    productId: string;
-  }[];
+    productId: string
+  }[]
 }

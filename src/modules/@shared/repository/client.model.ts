@@ -14,9 +14,6 @@ export default class ClientModel extends Model {
   @Column({ allowNull: false })
   id: string
 
-  @Column
-  orderId: string
-
   @Column({ allowNull: false })
   name: string
 

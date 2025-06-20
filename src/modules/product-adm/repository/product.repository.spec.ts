@@ -104,7 +104,7 @@ describe('ProductRepository test', () => {
       createdAt: new Date(),
       updatedAt: new Date()
     }
-    AdmProductModel.create({
+    await AdmProductModel.create({
       ...input
     })
 
