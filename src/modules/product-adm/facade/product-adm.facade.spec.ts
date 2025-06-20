@@ -80,4 +80,33 @@ describe('ProductAdmFacade test', () => {
     expect(result.productId).toBe(input.id)
     expect(result.stock).toBe(input.stock)
   })
+
+  it('should find all products stock', async () => {
+    const productFacade =
+      ProductAdmFacadeFactory.create()
+    const input = {
+      id: '1',
+      name: 'Product 1',
+      description: 'Product 1 description',
+      purchasePrice: 10,
+      stock: 10
+    }
+    await productFacade.addProduct(input)
+
+    const result = await productFacade.findAll()
+
+    expect(result.products[0].id).toBe(input.id)
+    expect(result.products[0].name).toBe(
+      input.name
+    )
+    expect(result.products[0].description).toBe(
+      input.description
+    )
+    expect(result.products[0].purchasePrice).toBe(
+      input.purchasePrice
+    )
+    expect(result.products[0].stock).toBe(
+      input.stock
+    )
+  })
 })

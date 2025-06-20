@@ -13,7 +13,7 @@ export function handler(
     try {
       await handler(req, res)
     } catch (err: any) {
-      console.error(err)
+      //console.error(err)
       res.status(500).send({
         error: err.message
       })

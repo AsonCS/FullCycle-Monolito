@@ -21,6 +21,7 @@ export default class ProductRepository
     }
     await AdmProductModel.create({ ...input })
   }
+
   async find(id: string): Promise<Product> {
     const product: AdmProductFields =
       await AdmProductModel.findOne({
@@ -42,5 +43,23 @@ export default class ProductRepository
       createdAt: product.createdAt,
       updatedAt: product.updatedAt
     })
+  }
+
+  async findAll(): Promise<Product[]> {
+    const products: AdmProductFields[] =
+      await AdmProductModel.findAll()
+
+    return products.map(
+      (product) =>
+        new Product({
+          id: new Id(product.id),
+          name: product.name,
+          description: product.description,
+          purchasePrice: product.purchasePrice,
+          stock: product.stock,
+          createdAt: product.createdAt,
+          updatedAt: product.updatedAt
+        })
+    )
   }
 }
