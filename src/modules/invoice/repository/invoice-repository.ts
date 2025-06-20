@@ -34,6 +34,7 @@ export default class InvoiceRepository
       }
     )
   }
+
   async find(id: string): Promise<Invoice> {
     const invoice = await InvoiceModel.findOne({
       where: { id },
@@ -68,5 +69,38 @@ export default class InvoiceRepository
       createdAt: invoice.createdAt,
       updatedAt: invoice.updatedAt
     })
+  }
+
+  async findAll(): Promise<Invoice[]> {
+    const invoices = await InvoiceModel.findAll({
+      include: [InvoiceItemModel]
+    })
+
+    return invoices.map(
+      (invoice) =>
+        new Invoice({
+          id: new Id(invoice.id),
+          name: invoice.name,
+          document: invoice.document,
+          address: Address.newInstance({
+            street: invoice.street,
+            number: invoice.number,
+            complement: invoice.complement,
+            city: invoice.city,
+            state: invoice.state,
+            zipCode: invoice.zipCode
+          }),
+          items: invoice.items.map(
+            (item) =>
+              new InvoiceItem({
+                id: item.id,
+                name: item.name,
+                price: item.price
+              })
+          ),
+          createdAt: invoice.createdAt,
+          updatedAt: invoice.updatedAt
+        })
+    )
   }
 }

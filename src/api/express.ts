@@ -1,9 +1,9 @@
 import express, { Express } from 'express'
 
 import { productsRoute } from './routes/products/products.route'
-import { checkoutRoute } from './routes/checkout.route'
+import { checkoutRoute } from './routes/checkout/checkout.route'
 import { clientsRoute } from './routes/clients/clients.route'
-import { invoiceRoute } from './routes/invoice.route'
+import { invoiceRoute } from './routes/invoice/invoice.route'
 import { setupDb } from './sequelize'
 
 export const app: Express = express()

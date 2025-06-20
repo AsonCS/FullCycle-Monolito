@@ -7,7 +7,6 @@ import {
   FindAllClientFacadeOutputDto,
   FindClientFacadeOutputDto
 } from '../../../modules/client-adm/facade/client-adm.facade.interface'
-import Address from '../../../modules/@shared/domain/value-object/address'
 
 describe('E2E test for client', () => {
   ;(() => {

@@ -30,7 +30,7 @@ describe('InvoiceRepository test', () => {
     })
   })()
 
-  it('should create a invoice', async () => {
+  it('should create an invoice', async () => {
     const invoice = new Invoice({
       id: new Id('Invoice 1'),
       name: 'Invoice name',
@@ -117,7 +117,7 @@ describe('InvoiceRepository test', () => {
     )
   })
 
-  it('should find a invoice', async () => {
+  it('should find an invoice', async () => {
     const createdAt = new Date()
     const updatedAt = new Date()
     await InvoiceModel.create(
@@ -155,6 +155,92 @@ describe('InvoiceRepository test', () => {
     const result = await repository.find(
       'Invoice 1'
     )
+
+    expect(result).toBeDefined()
+    expect(result.id.id).toEqual('Invoice 1')
+    expect(result.name).toEqual('Invoice name')
+    expect(result.document).toEqual(
+      'Invoice document'
+    )
+    expect(result.address.street).toEqual(
+      'Invoice street'
+    )
+    expect(result.address.number).toEqual(
+      'Invoice number'
+    )
+    expect(result.address.complement).toEqual(
+      'Invoice complement'
+    )
+    expect(result.address.city).toEqual(
+      'Invoice city'
+    )
+    expect(result.address.state).toEqual(
+      'Invoice state'
+    )
+    expect(result.address.zipCode).toEqual(
+      'Invoice zipCode'
+    )
+    expect(result.items.length).toBe(2)
+    expect(result.items[0].id).toEqual(
+      'Invoice item 1'
+    )
+    expect(result.items[0].name).toEqual(
+      'Invoice item name'
+    )
+    expect(result.items[0].price).toEqual(100)
+    expect(result.items[1].id).toEqual(
+      'Invoice item 2'
+    )
+    expect(result.items[1].name).toEqual(
+      'Invoice item 2 name'
+    )
+    expect(result.items[1].price).toEqual(200)
+    expect(result.total).toBe(300)
+    expect(result.createdAt.toString()).toEqual(
+      createdAt.toString()
+    )
+    expect(result.updatedAt.toString()).toEqual(
+      updatedAt.toString()
+    )
+  })
+
+  it('should find all invoices', async () => {
+    const createdAt = new Date()
+    const updatedAt = new Date()
+    await InvoiceModel.create(
+      {
+        id: 'Invoice 1',
+        name: 'Invoice name',
+        document: 'Invoice document',
+        street: 'Invoice street',
+        number: 'Invoice number',
+        complement: 'Invoice complement',
+        city: 'Invoice city',
+        state: 'Invoice state',
+        zipCode: 'Invoice zipCode',
+        items: [
+          {
+            id: 'Invoice item 1',
+            name: 'Invoice item name',
+            price: 100
+          },
+          {
+            id: 'Invoice item 2',
+            name: 'Invoice item 2 name',
+            price: 200
+          }
+        ],
+        createdAt: createdAt,
+        updatedAt: updatedAt
+      },
+      {
+        include: [InvoiceItemModel]
+      }
+    )
+    const repository = new InvoiceRepository()
+
+    const results = await repository.findAll()
+    const result = results[0]
 
     expect(result).toBeDefined()
     expect(result.id.id).toEqual('Invoice 1')

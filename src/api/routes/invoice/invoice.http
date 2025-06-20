@@ -1,0 +1,34 @@
+@baseUrl = http://localhost:3000
+
+###
+GET {{baseUrl}}/invoice
+
+###
+GET {{baseUrl}}/invoice/4750ae98-e505-448b-90b3-a2d8e607b5d7
+
+###
+POST {{baseUrl}}/invoice
+Content-Type: application/json
+
+{
+    "name": "Invoice name",
+    "document": "Invoice document",
+    "street": "Address street",
+    "number": "Address street number",
+    "complement": "Address complement",
+    "city": "Address city",
+    "state": "Address state",
+    "zipCode": "Address zip code",
+    "items": [
+        {
+            "id": "Item 1",
+            "name": "Item name",
+            "price": 100
+        },
+        {
+            "id": "Item 2",
+            "name": "Item name 2",
+            "price": 200
+        }
+    ]
+}
