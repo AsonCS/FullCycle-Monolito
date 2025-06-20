@@ -1,6 +1,9 @@
 import request from 'supertest'
 import { app } from '../../express'
-import { sequelize } from '../../sequelize'
+import {
+  sequelize,
+  setupDb
+} from '../../sequelize'
 import { ClientModel } from '../../../modules/client-adm/repository/client.model'
 import {
   AddClientFacadeInputDto,
@@ -9,15 +12,14 @@ import {
 } from '../../../modules/client-adm/facade/client-adm.facade.interface'
 
 describe('E2E test for client', () => {
-  ;(() => {
-    beforeEach(async () => {
-      await sequelize.sync({ force: true })
-    })
+  beforeEach(async () => {
+    await setupDb(':memory:')
+    await sequelize.sync({ force: true })
+  })
 
-    afterAll(async () => {
-      await sequelize.close()
-    })
-  })()
+  afterAll(async () => {
+    await sequelize.close()
+  })
 
   it('should find a client', async () => {
     const createdAt = new Date()
@@ -92,45 +94,33 @@ describe('E2E test for client', () => {
 
     expect(response.status).toBe(200)
 
-    const output: FindAllClientFacadeOutputDto =
+    const output: FindAllClientFacadeOutputDto[] =
       response.body
 
-    expect(output.clients.length).toBe(1)
-    expect(output.clients[0].id).toBe('1')
-    expect(output.clients[0].name).toBe('Lucian')
-    expect(output.clients[0].email).toBe(
-      'lucian@123.com'
-    )
-    expect(output.clients[0].document).toBe(
-      '1234-5678'
-    )
-    expect(output.clients[0].address.street).toBe(
+    expect(output.length).toBe(1)
+    expect(output[0].id).toBe('1')
+    expect(output[0].name).toBe('Lucian')
+    expect(output[0].email).toBe('lucian@123.com')
+    expect(output[0].document).toBe('1234-5678')
+    expect(output[0].address.street).toBe(
       'Rua 123'
     )
-    expect(output.clients[0].address.number).toBe(
-      '99'
+    expect(output[0].address.number).toBe('99')
+    expect(output[0].address.complement).toBe(
+      'Casa Verde'
     )
-    expect(
-      output.clients[0].address.complement
-    ).toBe('Casa Verde')
-    expect(output.clients[0].address.city).toBe(
+    expect(output[0].address.city).toBe(
       'Criciúma'
     )
-    expect(output.clients[0].address.state).toBe(
-      'SC'
+    expect(output[0].address.state).toBe('SC')
+    expect(output[0].address.zipCode).toBe(
+      '88888-888'
     )
     expect(
-      output.clients[0].address.zipCode
-    ).toBe('88888-888')
-    expect(
-      new Date(
-        output.clients[0].createdAt
-      ).toString()
+      new Date(output[0].createdAt).toString()
     ).toBe(createdAt.toString())
     expect(
-      new Date(
-        output.clients[0].updatedAt
-      ).toString()
+      new Date(output[0].updatedAt).toString()
     ).toBe(updatedAt.toString())
   })
 

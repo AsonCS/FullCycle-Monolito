@@ -11,30 +11,30 @@ export default class FindAllInvoiceUseCase
     this._invoiceRepository = invoiceRepository
   }
 
-  async execute(): Promise<FindAllInvoiceUseCaseOutputDto> {
+  async execute(): Promise<
+    FindAllInvoiceUseCaseOutputDto[]
+  > {
     const invoices =
       await this._invoiceRepository.findAll()
-    return {
-      invoices: invoices.map((invoice) => ({
-        id: invoice.id.id,
-        name: invoice.name,
-        document: invoice.document,
-        address: {
-          street: invoice.address.street,
-          number: invoice.address.number,
-          complement: invoice.address.complement,
-          city: invoice.address.city,
-          state: invoice.address.state,
-          zipCode: invoice.address.zipCode
-        },
-        items: invoice.items.map((item) => ({
-          id: item.id,
-          name: item.name,
-          price: item.price
-        })),
-        total: invoice.total,
-        createdAt: invoice.createdAt
-      }))
-    }
+    return invoices.map((invoice) => ({
+      id: invoice.id.id,
+      name: invoice.name,
+      document: invoice.document,
+      address: {
+        street: invoice.address.street,
+        number: invoice.address.number,
+        complement: invoice.address.complement,
+        city: invoice.address.city,
+        state: invoice.address.state,
+        zipCode: invoice.address.zipCode
+      },
+      items: invoice.items.map((item) => ({
+        id: item.id,
+        name: item.name,
+        price: item.price
+      })),
+      total: invoice.total,
+      createdAt: invoice.createdAt
+    }))
   }
 }

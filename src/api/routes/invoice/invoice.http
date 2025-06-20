@@ -4,7 +4,7 @@
 GET {{baseUrl}}/invoice
 
 ###
-GET {{baseUrl}}/invoice/4750ae98-e505-448b-90b3-a2d8e607b5d7
+GET {{baseUrl}}/invoice/e846bf7c-438e-404b-8d77-77667dd9bb01
 
 ###
 POST {{baseUrl}}/invoice

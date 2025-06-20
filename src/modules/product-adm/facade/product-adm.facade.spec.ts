@@ -4,6 +4,7 @@ import {
   AdmProductFields,
   AdmProductModel
 } from '../repository/product.model'
+import { FindAllFacadeOutputDto } from './product-adm.facade.interface'
 
 describe('ProductAdmFacade test', () => {
   let sequelize: Sequelize
@@ -93,20 +94,17 @@ describe('ProductAdmFacade test', () => {
     }
     await productFacade.addProduct(input)
 
-    const result = await productFacade.findAll()
+    const result: FindAllFacadeOutputDto[] =
+      await productFacade.findAll()
 
-    expect(result.products[0].id).toBe(input.id)
-    expect(result.products[0].name).toBe(
-      input.name
-    )
-    expect(result.products[0].description).toBe(
+    expect(result[0].id).toBe(input.id)
+    expect(result[0].name).toBe(input.name)
+    expect(result[0].description).toBe(
       input.description
     )
-    expect(result.products[0].purchasePrice).toBe(
+    expect(result[0].purchasePrice).toBe(
       input.purchasePrice
     )
-    expect(result.products[0].stock).toBe(
-      input.stock
-    )
+    expect(result[0].stock).toBe(input.stock)
   })
 })

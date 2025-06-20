@@ -35,22 +35,20 @@ export interface FindClientFacadeOutputDto {
 }
 
 export interface FindAllClientFacadeOutputDto {
-  clients: {
-    id: string
-    name: string
-    email: string
-    document: string
-    address: {
-      street: string
-      number: string
-      complement: string
-      city: string
-      state: string
-      zipCode: string
-    }
-    createdAt: Date
-    updatedAt: Date
-  }[]
+  id: string
+  name: string
+  email: string
+  document: string
+  address: {
+    street: string
+    number: string
+    complement: string
+    city: string
+    state: string
+    zipCode: string
+  }
+  createdAt: Date
+  updatedAt: Date
 }
 
 export default interface ClientAdmFacadeInterface {
@@ -62,5 +60,7 @@ export default interface ClientAdmFacadeInterface {
     input: FindClientFacadeInputDto
   ): Promise<FindClientFacadeOutputDto>
 
-  findAll(): Promise<FindAllClientFacadeOutputDto>
+  findAll(): Promise<
+    FindAllClientFacadeOutputDto[]
+  >
 }

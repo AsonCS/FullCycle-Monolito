@@ -87,7 +87,9 @@ export default class InvoiceFacade
     return this._findUseCase.execute(input)
   }
 
-  findAllInvoices(): Promise<FindAllInvoiceFacadeOutputDto> {
+  findAllInvoices(): Promise<
+    FindAllInvoiceFacadeOutputDto[]
+  > {
     return this._findAllUseCase.execute()
   }
 }

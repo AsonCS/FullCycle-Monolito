@@ -36,41 +36,35 @@ describe('FindAll Clients use case unit test', () => {
       repository
     )
 
-    const result: FindAllClientUseCaseOutputDto =
+    const result: FindAllClientUseCaseOutputDto[] =
       await usecase.execute()
 
     expect(repository.findAll).toHaveBeenCalled()
-    expect(result.clients[0].id).toEqual(
-      client.id.id
+    expect(result[0].id).toEqual(client.id.id)
+    expect(result[0].name).toEqual(client.name)
+    expect(result[0].email).toEqual(client.email)
+    expect(result[0].address.street).toEqual(
+      client.address.street
     )
-    expect(result.clients[0].name).toEqual(
-      client.name
+    expect(result[0].address.number).toEqual(
+      client.address.number
     )
-    expect(result.clients[0].email).toEqual(
-      client.email
+    expect(result[0].address.complement).toEqual(
+      client.address.complement
     )
-    expect(
-      result.clients[0].address.street
-    ).toEqual(client.address.street)
-    expect(
-      result.clients[0].address.number
-    ).toEqual(client.address.number)
-    expect(
-      result.clients[0].address.complement
-    ).toEqual(client.address.complement)
-    expect(
-      result.clients[0].address.city
-    ).toEqual(client.address.city)
-    expect(
-      result.clients[0].address.state
-    ).toEqual(client.address.state)
-    expect(
-      result.clients[0].address.zipCode
-    ).toEqual(client.address.zipCode)
-    expect(result.clients[0].createdAt).toEqual(
+    expect(result[0].address.city).toEqual(
+      client.address.city
+    )
+    expect(result[0].address.state).toEqual(
+      client.address.state
+    )
+    expect(result[0].address.zipCode).toEqual(
+      client.address.zipCode
+    )
+    expect(result[0].createdAt).toEqual(
       client.createdAt
     )
-    expect(result.clients[0].updatedAt).toEqual(
+    expect(result[0].updatedAt).toEqual(
       client.updatedAt
     )
   })

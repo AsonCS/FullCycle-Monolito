@@ -1,5 +1,6 @@
 import Id from '../../../@shared/domain/value-object/id.value-object'
 import Product from '../../domain/product.entity'
+import { FindAllOutputDto } from './find-all-products.dto'
 import FindAllUseCase from './find-all.usecase'
 
 const product = new Product({
@@ -27,21 +28,18 @@ describe('FindAll usecase unit test', () => {
       ProductRepository
     )
 
-    const result = await useCase.execute()
+    const result: FindAllOutputDto[] =
+      await useCase.execute()
 
     expect(
       ProductRepository.findAll
     ).toHaveBeenCalled()
-    expect(result.products[0].id).toBe('1')
-    expect(result.products[0].name).toBe(
-      'Product'
-    )
-    expect(result.products[0].description).toBe(
+    expect(result[0].id).toBe('1')
+    expect(result[0].name).toBe('Product')
+    expect(result[0].description).toBe(
       'Product description'
     )
-    expect(result.products[0].purchasePrice).toBe(
-      100
-    )
-    expect(result.products[0].stock).toBe(10)
+    expect(result[0].purchasePrice).toBe(100)
+    expect(result[0].stock).toBe(10)
   })
 })

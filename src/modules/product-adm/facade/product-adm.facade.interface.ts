@@ -16,21 +16,21 @@ export interface CheckStockFacadeOutputDto {
 }
 
 export interface FindAllFacadeOutputDto {
-  products: {
-    id?: string
-    name: string
-    description: string
-    purchasePrice: number
-    stock: number
-  }[]
+  id?: string
+  name: string
+  description: string
+  purchasePrice: number
+  stock: number
 }
 
 export default interface ProductAdmFacadeInterface {
   addProduct(
     input: AddProductFacadeInputDto
   ): Promise<void>
+
   checkStock(
     input: CheckStockFacadeInputDto
   ): Promise<CheckStockFacadeOutputDto>
-  findAll(): Promise<FindAllFacadeOutputDto>
+
+  findAll(): Promise<FindAllFacadeOutputDto[]>
 }

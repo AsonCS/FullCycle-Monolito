@@ -1,6 +1,9 @@
 import request from 'supertest'
 import { app } from '../../express'
-import { sequelize } from '../../sequelize'
+import {
+  sequelize,
+  setupDb
+} from '../../sequelize'
 import {
   AdmProductFields,
   AdmProductModel
@@ -13,6 +16,7 @@ import {
 describe('E2E test for product', () => {
   ;(() => {
     beforeEach(async () => {
+      await setupDb(':memory:')
       await sequelize.sync({ force: true })
     })
 
@@ -54,35 +58,27 @@ describe('E2E test for product', () => {
 
     expect(response.status).toBe(200)
 
-    const output: FindAllFacadeOutputDto =
+    const output: FindAllFacadeOutputDto[] =
       response.body
-    expect(output.products.length).toBe(2)
-    expect(output.products[0].id).toBe(input.id)
-    expect(output.products[0].name).toBe(
-      input.name
-    )
-    expect(output.products[0].description).toBe(
+    expect(output.length).toBe(2)
+    expect(output[0].id).toBe(input.id)
+    expect(output[0].name).toBe(input.name)
+    expect(output[0].description).toBe(
       input.description
     )
-    expect(output.products[0].purchasePrice).toBe(
+    expect(output[0].purchasePrice).toBe(
       input.purchasePrice
     )
-    expect(output.products[0].stock).toBe(
-      input.stock
-    )
-    expect(output.products[1].id).toBe(input2.id)
-    expect(output.products[1].name).toBe(
-      input2.name
-    )
-    expect(output.products[1].description).toBe(
+    expect(output[0].stock).toBe(input.stock)
+    expect(output[1].id).toBe(input2.id)
+    expect(output[1].name).toBe(input2.name)
+    expect(output[1].description).toBe(
       input2.description
     )
-    expect(output.products[1].purchasePrice).toBe(
+    expect(output[1].purchasePrice).toBe(
       input2.purchasePrice
     )
-    expect(output.products[1].stock).toBe(
-      input2.stock
-    )
+    expect(output[1].stock).toBe(input2.stock)
   })
 
   it('should create a product', async () => {

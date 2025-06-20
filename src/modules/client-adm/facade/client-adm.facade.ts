@@ -73,7 +73,9 @@ export default class ClientAdmFacade
     return await this._findUsecase.execute(input)
   }
 
-  async findAll(): Promise<FindAllClientFacadeOutputDto> {
+  async findAll(): Promise<
+    FindAllClientFacadeOutputDto[]
+  > {
     return await this._findAllUsecase.execute()
   }
 }

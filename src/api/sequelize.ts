@@ -1,10 +1,4 @@
-import {
-  Column,
-  Model,
-  PrimaryKey,
-  Sequelize,
-  Table
-} from 'sequelize-typescript'
+import { Sequelize } from 'sequelize-typescript'
 
 import { ClientModel } from '../modules/client-adm/repository/client.model'
 import { InvoiceModel } from '../modules/invoice/repository/invoice.model'
@@ -14,10 +8,12 @@ import ProductModel from '../modules/@shared/repository/product.model'
 
 export let sequelize: Sequelize
 
-export async function setupDb() {
+export async function setupDb(
+  storage: string = 'sqlite.db'
+) {
   sequelize = new Sequelize({
     dialect: 'sqlite',
-    storage: 'sqlite.db',
+    storage: storage,
     logging: false
   })
   await sequelize.addModels([

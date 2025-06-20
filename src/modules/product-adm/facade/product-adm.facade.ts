@@ -52,7 +52,7 @@ export default class ProductAdmFacade
     return this._checkStockUsecase.execute(input)
   }
 
-  findAll(): Promise<FindAllFacadeOutputDto> {
+  findAll(): Promise<FindAllFacadeOutputDto[]> {
     return this._findAllUsecase.execute()
   }
 }

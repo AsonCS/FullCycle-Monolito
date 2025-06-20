@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize-typescript'
 import { ClientModel } from '../repository/client.model'
 import ClientAdmFacadeFactory from '../factory/client-adm.facade.factory'
 import Address from '../../@shared/domain/value-object/address'
+import { FindAllClientFacadeOutputDto } from './client-adm.facade.interface'
 
 describe('Client Adm Facade test', () => {
   let sequelize: Sequelize
@@ -148,36 +149,33 @@ describe('Client Adm Facade test', () => {
 
     await facade.add(input)
 
-    const client = await facade.findAll()
+    const client: FindAllClientFacadeOutputDto[] =
+      await facade.findAll()
 
-    expect(client.clients.length).toBe(1)
-    expect(client.clients[0].id).toBe(input.id)
-    expect(client.clients[0].name).toBe(
-      input.name
-    )
-    expect(client.clients[0].email).toBe(
-      input.email
-    )
-    expect(client.clients[0].document).toBe(
+    expect(client.length).toBe(1)
+    expect(client[0].id).toBe(input.id)
+    expect(client[0].name).toBe(input.name)
+    expect(client[0].email).toBe(input.email)
+    expect(client[0].document).toBe(
       input.document
     )
-    expect(client.clients[0].address.street).toBe(
+    expect(client[0].address.street).toBe(
       input.address.street
     )
-    expect(client.clients[0].address.number).toBe(
+    expect(client[0].address.number).toBe(
       input.address.number
     )
-    expect(
-      client.clients[0].address.complement
-    ).toBe(input.address.complement)
-    expect(client.clients[0].address.city).toBe(
+    expect(client[0].address.complement).toBe(
+      input.address.complement
+    )
+    expect(client[0].address.city).toBe(
       input.address.city
     )
-    expect(client.clients[0].address.state).toBe(
+    expect(client[0].address.state).toBe(
       input.address.state
     )
-    expect(
-      client.clients[0].address.zipCode
-    ).toBe(input.address.zipCode)
+    expect(client[0].address.zipCode).toBe(
+      input.address.zipCode
+    )
   })
 })

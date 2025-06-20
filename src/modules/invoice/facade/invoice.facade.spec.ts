@@ -254,9 +254,9 @@ describe('InvoiceFacade test', () => {
     )
 
     const facade = InvoiceFacadeFactory.create()
-    const results: FindAllInvoiceFacadeOutputDto =
+    const results: FindAllInvoiceFacadeOutputDto[] =
       await facade.findAllInvoices()
-    const result = results.invoices[0]
+    const result = results[0]
 
     expect(result.id).toBe('Invoice id')
     expect(result.name).toBe('Invoice name')

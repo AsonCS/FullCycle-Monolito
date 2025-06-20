@@ -48,9 +48,9 @@ describe('Find invoice usecase unit test', () => {
       }
     })
 
-    const results: FindAllInvoiceUseCaseOutputDto =
+    const results: FindAllInvoiceUseCaseOutputDto[] =
       await usecase.execute()
-    const result = results.invoices[0]
+    const result = results[0]
 
     expect(result.id).toBe('Invoice id')
     expect(result.name).toBe('Invoice name')

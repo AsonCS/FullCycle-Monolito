@@ -11,17 +11,15 @@ export default class FindAllUseCase
     this._productRepository = productRepository
   }
 
-  async execute(): Promise<FindAllOutputDto> {
+  async execute(): Promise<FindAllOutputDto[]> {
     const result =
       await this._productRepository.findAll()
-    return {
-      products: result.map((product) => ({
-        id: product.id.id,
-        name: product.name,
-        description: product.description,
-        purchasePrice: product.purchasePrice,
-        stock: product.stock
-      }))
-    }
+    return result.map((product) => ({
+      id: product.id.id,
+      name: product.name,
+      description: product.description,
+      purchasePrice: product.purchasePrice,
+      stock: product.stock
+    }))
   }
 }

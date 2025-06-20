@@ -1,6 +1,9 @@
 import request from 'supertest'
 import { app } from '../../express'
-import { sequelize } from '../../sequelize'
+import {
+  sequelize,
+  setupDb
+} from '../../sequelize'
 import { InvoiceModel } from '../../../modules/invoice/repository/invoice.model'
 import InvoiceItemModel from '../../../modules/invoice/repository/invoice-item.model'
 import {
@@ -10,15 +13,14 @@ import {
 } from '../../../modules/invoice/facade/invoice.facade.interface'
 
 describe('E2E test for invoice', () => {
-  ;(() => {
-    beforeEach(async () => {
-      await sequelize.sync({ force: true })
-    })
+  beforeEach(async () => {
+    await setupDb(':memory:')
+    await sequelize.sync({ force: true })
+  })
 
-    afterAll(async () => {
-      await sequelize.close()
-    })
-  })()
+  afterAll(async () => {
+    await sequelize.close()
+  })
 
   it('should find an invoice', async () => {
     const createdAt = new Date()
@@ -141,9 +143,9 @@ describe('E2E test for invoice', () => {
 
     expect(response.status).toBe(200)
 
-    const results: FindAllInvoiceFacadeOutputDto =
+    const results: FindAllInvoiceFacadeOutputDto[] =
       response.body
-    const result = results.invoices[0]
+    const result = results[0]
 
     expect(result.id).toBe('Invoice id')
     expect(result.name).toBe('Invoice name')
