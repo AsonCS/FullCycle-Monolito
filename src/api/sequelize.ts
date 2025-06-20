@@ -10,8 +10,7 @@ import { ClientModel } from '../modules/client-adm/repository/client.model'
 import { InvoiceModel } from '../modules/invoice/repository/invoice.model'
 import InvoiceItemModel from '../modules/invoice/repository/invoice-item.model'
 import TransactionModel from '../modules/payment/repository/transaction.model'
-import { ProductModel as ProductAdmModel } from '../modules/product-adm/repository/product.model'
-import ProductStoreCatalogModel from '../modules/store-catalog/repository/product.model'
+import ProductModel from '../modules/@shared/repository/product.model'
 
 export let sequelize: Sequelize
 
@@ -26,8 +25,7 @@ export async function setupDb() {
     InvoiceModel,
     InvoiceItemModel,
     TransactionModel,
-    ProductAdmModel,
-    ProductStoreCatalogModel
+    ProductModel
   ])
   await sequelize.sync()
 }

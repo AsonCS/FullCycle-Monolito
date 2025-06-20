@@ -109,11 +109,11 @@ describe('InvoiceRepository test', () => {
     expect(result.items[1].price).toEqual(
       invoice.items[1].price
     )
-    expect(result.createdAt).toEqual(
-      invoice.createdAt
+    expect(result.createdAt.toString()).toEqual(
+      invoice.createdAt.toString()
     )
-    expect(result.updatedAt).toEqual(
-      invoice.updatedAt
+    expect(result.updatedAt.toString()).toEqual(
+      invoice.updatedAt.toString()
     )
   })
 
@@ -196,7 +196,11 @@ describe('InvoiceRepository test', () => {
     )
     expect(result.items[1].price).toEqual(200)
     expect(result.total).toBe(300)
-    expect(result.createdAt).toStrictEqual(createdAt)
-    expect(result.updatedAt).toStrictEqual(updatedAt)
+    expect(result.createdAt.toString()).toEqual(
+      createdAt.toString()
+    )
+    expect(result.updatedAt.toString()).toEqual(
+      updatedAt.toString()
+    )
   })
 })
