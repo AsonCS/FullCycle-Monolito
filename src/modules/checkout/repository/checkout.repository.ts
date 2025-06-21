@@ -14,36 +14,24 @@ export default class CheckoutRepository
   implements CheckoutGateway
 {
   async add(order: Order): Promise<void> {
-    await ClientModel.create(
-      {
-        id: order.client.id.id,
-        name: order.client.name,
-        email: order.client.email,
-        street: order.client.address.street,
-        number: order.client.address.number,
-        complement:
-          order.client.address.complement,
-        city: order.client.address.city,
-        state: order.client.address.state,
-        zipcode: order.client.address.zipCode
-      },
-      {
-        ignoreDuplicates: true
-      }
-    )
     const input: OrderFields = {
       id: order.id.id,
       status: order.status
     }
-    await OrderModel.create(
-      {
-        clientId: order.client.id.id,
-        ...input
-      },
-      {
-        include: [ClientModel, ProductModel]
-      }
-    )
+    try {
+      await OrderModel.create(
+        {
+          clientId: order.client.id.id,
+          ...input
+        },
+        {
+          include: [ClientModel, ProductModel]
+        }
+      )
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
     await Promise.all(
       order.products.map((product) => {
         ProductModel.update(

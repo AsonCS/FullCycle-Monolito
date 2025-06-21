@@ -29,6 +29,7 @@ describe('E2E test for checkout', () => {
       id: 'ClientId',
       name: 'Client name',
       email: 'Client email',
+      document: 'Client document',
       street: 'Address street',
       number: 'Address street number',
       complement: 'Address complement',
@@ -75,7 +76,9 @@ describe('E2E test for checkout', () => {
       .post('/checkout')
       .send(input)
 
-    // console.log(response.body.error)
+    if (response.body.error) {
+      console.log(response.body.error)
+    }
     expect(response.status).toBe(204)
     expect(response.body).toEqual({})
   })
@@ -140,7 +143,7 @@ describe('E2E test for checkout', () => {
     )
   })
 
-  it('should find all clients', async () => {
+  it('should find all orders', async () => {
     const input: OrderFields = {
       id: 'Order id',
       client: {

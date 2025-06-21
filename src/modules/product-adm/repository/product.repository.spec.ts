@@ -1,6 +1,8 @@
 import { Sequelize } from 'sequelize-typescript'
 import Id from '../../@shared/domain/value-object/id.value-object'
-import Product from '../domain/product.entity'
+import Product, {
+  ProductProps
+} from '../domain/product.entity'
 import ProductRepository from './product.repository'
 import {
   AdmProductFields,
@@ -27,11 +29,12 @@ describe('ProductRepository test', () => {
   })
 
   it('should create a product', async () => {
-    const productProps = {
+    const productProps: ProductProps = {
       id: new Id('1'),
       name: 'Product 1',
       description: 'Product 1 description',
       purchasePrice: 100,
+      salesPrice: 100,
       stock: 10
     }
     const product = new Product(productProps)
@@ -70,6 +73,7 @@ describe('ProductRepository test', () => {
       name: 'Product 1',
       description: 'Product 1 description',
       purchasePrice: 100,
+      salesPrice: 100,
       stock: 10,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -100,6 +104,7 @@ describe('ProductRepository test', () => {
       name: 'Product 1',
       description: 'Product 1 description',
       purchasePrice: 100,
+      salesPrice: 100,
       stock: 10,
       createdAt: new Date(),
       updatedAt: new Date()

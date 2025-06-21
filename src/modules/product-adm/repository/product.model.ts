@@ -5,6 +5,7 @@ export interface AdmProductFields {
   name: string
   description: string
   purchasePrice: number
+  salesPrice: number
   stock: number
   createdAt: Date
   updatedAt: Date

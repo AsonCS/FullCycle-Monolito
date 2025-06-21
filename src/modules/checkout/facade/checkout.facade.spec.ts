@@ -10,6 +10,9 @@ import {
 } from './checkout.facade.interface'
 import ClientModel from '../../@shared/repository/client.model'
 import ProductModel from '../../@shared/repository/product.model'
+import TransactionModel from '../../payment/repository/transaction.model'
+import InvoiceModel from '../../invoice/repository/invoice.model'
+import InvoiceItemModel from '../../invoice/repository/invoice-item.model'
 
 describe('CheckoutFacade test', () => {
   ;(() => {
@@ -25,8 +28,11 @@ describe('CheckoutFacade test', () => {
 
       await sequelize.addModels([
         ClientModel,
+        InvoiceModel,
+        InvoiceItemModel,
         OrderModel,
-        ProductModel
+        ProductModel,
+        TransactionModel
       ])
       await sequelize.sync()
     })
@@ -41,6 +47,7 @@ describe('CheckoutFacade test', () => {
       id: 'Client id',
       name: 'Client name',
       email: 'Client email',
+      document: 'Client document',
       street: 'Address street',
       number: 'Address street number',
       complement: 'Address complement',

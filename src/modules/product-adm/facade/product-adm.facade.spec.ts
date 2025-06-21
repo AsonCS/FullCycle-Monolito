@@ -4,7 +4,10 @@ import {
   AdmProductFields,
   AdmProductModel
 } from '../repository/product.model'
-import { FindAllFacadeOutputDto } from './product-adm.facade.interface'
+import {
+  AddProductFacadeInputDto,
+  FindAllFacadeOutputDto
+} from './product-adm.facade.interface'
 
 describe('ProductAdmFacade test', () => {
   let sequelize: Sequelize
@@ -36,11 +39,12 @@ describe('ProductAdmFacade test', () => {
     const productFacade =
       ProductAdmFacadeFactory.create()
 
-    const input = {
+    const input: AddProductFacadeInputDto = {
       id: '1',
       name: 'Product 1',
       description: 'Product 1 description',
       purchasePrice: 10,
+      salesPrice: 10,
       stock: 10
     }
 
@@ -65,11 +69,12 @@ describe('ProductAdmFacade test', () => {
   it('should check product stock', async () => {
     const productFacade =
       ProductAdmFacadeFactory.create()
-    const input = {
+    const input: AddProductFacadeInputDto = {
       id: '1',
       name: 'Product 1',
       description: 'Product 1 description',
       purchasePrice: 10,
+      salesPrice: 10,
       stock: 10
     }
     await productFacade.addProduct(input)
@@ -85,11 +90,12 @@ describe('ProductAdmFacade test', () => {
   it('should find all products stock', async () => {
     const productFacade =
       ProductAdmFacadeFactory.create()
-    const input = {
+    const input: AddProductFacadeInputDto = {
       id: '1',
       name: 'Product 1',
       description: 'Product 1 description',
       purchasePrice: 10,
+      salesPrice: 10,
       stock: 10
     }
     await productFacade.addProduct(input)

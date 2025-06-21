@@ -6,9 +6,11 @@ export interface PlaceOrderInputDto {
 }
 
 export interface PlaceOrderOutputDto {
+  invoiceId: string | null
   orderId: string
-  total: number
+  status: string
   products: {
     productId: string
   }[]
+  total: number
 }

@@ -1,0 +1,33 @@
+@baseUrl = http://localhost:3000
+
+###
+GET {{baseUrl}}/checkout
+
+### Approved
+POST {{baseUrl}}/checkout
+Content-Type: application/json
+
+{
+    "clientId": "31121a80-0bff-449c-89fb-972fb23fdd4c",
+    "products": [
+        {
+            "productId": "a6b99b7c-3af0-424e-bd62-da13a7f7d2f4"
+        },
+        {
+            "productId": "7deb0a53-401e-4b4d-b775-1c1b536b12c6"
+        }
+    ]
+}
+
+### Pending
+POST {{baseUrl}}/checkout
+Content-Type: application/json
+
+{
+    "clientId": "31121a80-0bff-449c-89fb-972fb23fdd4c",
+    "products": [
+        {
+            "productId": "810b10c0-cacd-4c52-a996-0fa552465a40"
+        }
+    ]
+}

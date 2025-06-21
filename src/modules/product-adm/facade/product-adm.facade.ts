@@ -39,6 +39,9 @@ export default class ProductAdmFacade
         'Purchase price is required'
       )
     }
+    if (!input.salesPrice) {
+      throw new Error('Sales price is required')
+    }
     if (!input.stock) {
       throw new Error('Stock is required')
     }

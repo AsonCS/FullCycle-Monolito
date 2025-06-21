@@ -3,6 +3,14 @@ import {
   FindClientFacadeOutputDto
 } from '../../../client-adm/facade/client-adm.facade.interface'
 import {
+  GenerateInvoiceFacadeInputDto,
+  GenerateInvoiceFacadeOutputDto
+} from '../../../invoice/facade/invoice.facade.interface'
+import {
+  PaymentFacadeInputDto,
+  PaymentFacadeOutputDto
+} from '../../../payment/facade/facade.interface'
+import {
   CheckStockFacadeInputDto,
   CheckStockFacadeOutputDto
 } from '../../../product-adm/facade/product-adm.facade.interface'
@@ -160,11 +168,46 @@ describe('Place order usecase unit test', () => {
     })
 
     expect(result).toBeDefined()
+    expect(result.invoiceId).toBeDefined()
     expect(result.orderId).toBeDefined()
+    expect(result.status).toBe('approved')
     expect(result.products).toBeDefined()
     expect(result.products.length).toBe(1)
     expect(result.products[0].productId).toBe(
       'Product5'
+    )
+    expect(result.total).toBe(100)
+  })
+
+  it('should return a not approved order', async () => {
+    const usecase = useCase({
+      paymentFacadeProcess: async (input) => ({
+        transactionId: 'Transaction id',
+        orderId: input.orderId,
+        amount: input.amount,
+        status: 'declined',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      })
+    })
+
+    const result = await usecase.execute({
+      clientId: 'Client id',
+      products: [
+        {
+          productId: 'Product6'
+        }
+      ]
+    })
+
+    expect(result).toBeDefined()
+    expect(result.invoiceId).toBeNull()
+    expect(result.orderId).toBeDefined()
+    expect(result.status).toBe('pending')
+    expect(result.products).toBeDefined()
+    expect(result.products.length).toBe(1)
+    expect(result.products[0].productId).toBe(
+      'Product6'
     )
     expect(result.total).toBe(100)
   })
@@ -194,6 +237,36 @@ describe('Place order usecase unit test', () => {
       updatedAt: new Date()
     }),
 
+    invoiceFacadeGenerateInvoice = async (
+      input
+    ) => ({
+      id: 'Invoice id',
+      name: input.name,
+      document: input.document,
+      street: input.street,
+      number: input.number,
+      complement: input.complement,
+      city: input.city,
+      state: input.state,
+      zipCode: input.zipCode,
+      items: input.items,
+      total: input.items.reduce(
+        (acc, item) => acc + item.price,
+        0
+      ),
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }),
+
+    paymentFacadeProcess = async (input) => ({
+      transactionId: 'Transaction id',
+      orderId: input.orderId,
+      amount: input.amount,
+      status: 'approved',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }),
+
     productFacadeCheckStock = async (input) => ({
       productId: input.productId,
       stock: 10
@@ -202,6 +275,16 @@ describe('Place order usecase unit test', () => {
     repositoryAdd = async (order: Order) => {}
   }: Props = {}): PlaceOrderUseCase {
     return new PlaceOrderUseCase({
+      catalogFacade: {
+        find(input) {
+          return catalogFacadeFind(input)
+        },
+        findAll() {
+          throw new Error(
+            'Method not implemented.'
+          )
+        }
+      },
       clientFacade: {
         add() {
           throw new Error(
@@ -217,6 +300,28 @@ describe('Place order usecase unit test', () => {
           )
         }
       },
+      invoiceFacade: {
+        findAllInvoices() {
+          throw new Error(
+            'Method not implemented.'
+          )
+        },
+        findInvoice() {
+          throw new Error(
+            'Method not implemented.'
+          )
+        },
+        generateInvoice(input) {
+          return invoiceFacadeGenerateInvoice(
+            input
+          )
+        }
+      },
+      paymentFacade: {
+        process(input) {
+          return paymentFacadeProcess(input)
+        }
+      },
       productFacade: {
         addProduct() {
           throw new Error(
@@ -225,16 +330,6 @@ describe('Place order usecase unit test', () => {
         },
         checkStock(input) {
           return productFacadeCheckStock(input)
-        },
-        findAll() {
-          throw new Error(
-            'Method not implemented.'
-          )
-        }
-      },
-      catalogFacade: {
-        find(input) {
-          return catalogFacadeFind(input)
         },
         findAll() {
           throw new Error(
@@ -263,6 +358,14 @@ describe('Place order usecase unit test', () => {
     clientFacadeFind?: (
       input: FindClientFacadeInputDto
     ) => Promise<FindClientFacadeOutputDto>
+
+    invoiceFacadeGenerateInvoice?: (
+      input: GenerateInvoiceFacadeInputDto
+    ) => Promise<GenerateInvoiceFacadeOutputDto>
+
+    paymentFacadeProcess?: (
+      input: PaymentFacadeInputDto
+    ) => Promise<PaymentFacadeOutputDto>
 
     productFacadeCheckStock?: (
       input: CheckStockFacadeInputDto

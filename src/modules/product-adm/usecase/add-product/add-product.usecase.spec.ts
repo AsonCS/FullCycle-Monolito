@@ -1,3 +1,4 @@
+import { AddProductInputDto } from "./add-product.dto";
 import AddProductUseCase from "./add-product.usecase";
 
 const MockRepository = () => {
@@ -13,10 +14,11 @@ describe("Add Product usecase unit test", () => {
     const productRepository = MockRepository();
     const usecase = new AddProductUseCase(productRepository);
 
-    const input = {
+    const input: AddProductInputDto = {
       name: "Product 1",
       description: "Product 1 description",
       purchasePrice: 100,
+      salesPrice: 100,
       stock: 10,
     };
 

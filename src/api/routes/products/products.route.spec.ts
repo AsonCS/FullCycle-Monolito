@@ -31,6 +31,7 @@ describe('E2E test for product', () => {
       name: 'Chair',
       description: 'Description',
       purchasePrice: 100,
+      salesPrice: 100,
       stock: 10,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -44,6 +45,7 @@ describe('E2E test for product', () => {
       name: 'Chair 2',
       description: 'Description 2',
       purchasePrice: 200,
+      salesPrice: 200,
       stock: 20,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -86,6 +88,7 @@ describe('E2E test for product', () => {
       name: 'Chair',
       description: 'Description',
       purchasePrice: 100,
+      salesPrice: 100,
       stock: 10
     }
     const response = await request(app)
@@ -102,6 +105,7 @@ describe('E2E test for product', () => {
       .send({
         description: 'Description',
         purchasePrice: 100,
+        salesPrice: 100,
         stock: 10
       })
 
@@ -115,6 +119,7 @@ describe('E2E test for product', () => {
       .send({
         name: 'Chair',
         purchasePrice: 100,
+        salesPrice: 100,
         stock: 10
       })
 
@@ -128,6 +133,7 @@ describe('E2E test for product', () => {
       .send({
         name: 'Chair',
         description: 'Description',
+        salesPrice: 100,
         stock: 10
       })
 
@@ -141,7 +147,22 @@ describe('E2E test for product', () => {
       .send({
         name: 'Chair',
         description: 'Description',
-        purchasePrice: 100
+        purchasePrice: 100,
+        stock: 10
+      })
+
+    expect(response.status).toBe(500)
+    expect(response.body.error).toBe(
+      'Sales price is required'
+    )
+
+    response = await request(app)
+      .post('/products')
+      .send({
+        name: 'Chair',
+        description: 'Description',
+        purchasePrice: 100,
+        salesPrice: 100
       })
 
     expect(response.status).toBe(500)

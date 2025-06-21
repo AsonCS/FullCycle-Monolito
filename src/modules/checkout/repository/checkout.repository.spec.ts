@@ -36,6 +36,19 @@ describe('CheckoutRepository test', () => {
   })()
 
   it('should create an order', async () => {
+    await ClientModel.create({
+      id: 'Client id',
+      name: 'Client name',
+      email: 'Client email',
+      street: 'Address street',
+      number: 'Address street number',
+      complement: 'Address complement',
+      city: 'Address city',
+      state: 'Address state',
+      zipcode: 'Address zip code',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    })
     await ProductModel.create({
       id: 'Product1',
       name: 'Product name 1',
@@ -49,7 +62,7 @@ describe('CheckoutRepository test', () => {
     const input = new Order({
       id: new Id('Order id'),
       client: new Client({
-        id: new Id('Client 1'),
+        id: new Id('Client id'),
         name: 'Client name',
         email: 'Client email',
         address: Address.newInstance({

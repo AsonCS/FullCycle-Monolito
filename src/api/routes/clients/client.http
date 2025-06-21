@@ -4,14 +4,13 @@
 GET {{baseUrl}}/clients
 
 ###
-GET {{baseUrl}}/clients/1
+GET {{baseUrl}}/clients/31121a80-0bff-449c-89fb-972fb23fdd4c
 
 ###
 POST {{baseUrl}}/clients
 Content-Type: application/json
 
 {
-    "id": "1",
     "name": "Lucian",
     "email": "lucian@xpto.com",
     "document": "1234-5678",
